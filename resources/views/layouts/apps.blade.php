@@ -103,11 +103,11 @@
                             <a class="nav-link" href="/blog">Blog</a>
                         </li>    
                         <li class="nav-item">
-                            <a class="nav-link" href="/profileMenu/{{Auth::user()->id}}/edit">Profile</a>
+                            <a class="nav-link" href="/profileMenu/edit/{{Auth::user()->id}}">Profile</a>
                         </li>
                     @elseif($role=='admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Admin</a>
+                            <a class="nav-link" href="#">{{Auth::user()->role}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/userMenu">User</a>
@@ -119,9 +119,11 @@
                                     Category
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="/categorize">Beach</a></li>
-                                    <li><a class="dropdown-item" href="/categorize">Mountain</a></li>
-                                    <li><a class="dropdown-item" href="/categorize">Forest</a></li>
+                                    @foreach($category as $cat)
+                                        <li>
+                                            <a class="dropdown-item" href="/categorize/{{$cat->id}}">{{$cat->name}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </li>

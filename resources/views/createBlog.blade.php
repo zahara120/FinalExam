@@ -9,7 +9,6 @@
 </style>
 
 @section('content')
-    <h1>ini Create Blog</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -32,21 +31,6 @@
                                 </div>
                             </div>
 
-                            <!-- dibikin dropdown dan bisa di select -->
-                            <!-- <div class="form-group row">
-                                <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="category" type="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required autocomplete="category">
-
-                                    @error('category')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> -->
-
                             <div class="form-group row">
                                 <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
                                 <div class="col-md-6">
@@ -67,10 +51,9 @@
                             </div>
 
                             <div class="form-group row mb-3">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">Story</label>
+                                <label for="floatingTextarea2" class="col-md-4 col-form-label text-md-right">Story</label>
                                 <div class="col-md-6">
-                                <input id="description" row="5" type="description" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description">
-
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Leave a comment here" style="height: 100px" name="description" required autocomplete="description" value="{{ old('description') }}"></textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

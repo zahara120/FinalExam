@@ -97,6 +97,7 @@ class HomeController extends Controller
         $category = Category::all();
         $article = Article::all();
         $article = Article::find($id);
+        
         $auth = Auth::check();
         $role = 'guest';
        if($auth){

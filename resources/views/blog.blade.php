@@ -33,6 +33,7 @@
                     <a href="{{  url("blog/{$article->id}/delete") }}">
                         <button type="button" class="btn btn-danger btn-sm">Delete</button>
                     </a>
+                    <a href="/blog/{{$article->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
                 </td>
             </tr>
             @endforeach

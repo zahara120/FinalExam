@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,7 +85,19 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        // dd($id);
+        
+        $category = Category::all();
+        $article = Article::find($id);
+
+        $auth = Auth::check();
+        $role = 'guest';
+
+        if($auth){
+            $role = Auth::user()->role;
+        }
+        
+        return view('editBlog',compact('role','category','article'));
     }
 
     /**
@@ -96,7 +109,30 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::all();
+        $category = Category::all();
+        $user = User::all();
+        $article = Article::find($id);
+        
+        if ($request->hasFile('image_uploded')){ 
+            $image_uploded = $request->image_uploded->getClientOriginalName() . '-' . time() . '.' . $request->image_uploded->extension();
+            $request->image_uploded->move(public_path('assets'), $image_uploded);
+            // dd($image);
+        }
+        $article->tittle  =  $request->tittle;
+        $article->image  =  $request->image_uploded->getClientOriginalName();
+        $article->description  =  $request->description;
+        $article->save();
+        // dd($request);
+
+        $auth = Auth::check();
+        $role = 'guest';
+ 
+       if($auth){
+            $role = Auth::user()->role;
+        }
+
+        return view('editBlog',compact('user','role','category','article'))->with('success',  'Successfully  update  a  student');;
     }
 
     /**

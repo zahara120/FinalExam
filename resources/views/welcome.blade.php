@@ -147,11 +147,11 @@
                         <a href="/blog">Blog</a>
                     </div>
                     <div class="top-left4 links">
-                        <a href="/profileMenu/{{Auth::user()->id}}/edit">Profile</a>
+                        <a href="/profileMenu/edit/{{Auth::user()->id}}">Profile</a>
                     </div>
                 @elseif($role=='admin')
                     <div class="top-left3 links">
-                        <a href="#">admin</a>
+                        <a href="#">{{Auth::user()->role}}</a>
                     </div>
                     <div class="top-left4 links">
                         <a href="/userMenu">User</a>

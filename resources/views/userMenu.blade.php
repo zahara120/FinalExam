@@ -21,9 +21,11 @@
         <td>{{  $user->name}}</td>
         <td>{{  $user->email }}</td>
         <td>
-            <a href="{{  url("userMenu/{$user->id}/delete") }}">
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-            </a>
+            <form action="{{  url("userMenu/{$user->id}/delete") }}" method="post">
+            @csrf
+            @method('delete')
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>    
         </td>
         </tr>
     @endforeach

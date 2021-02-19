@@ -187,9 +187,17 @@
                     <h5 class="card-title">{{$article->tittle}}</h5>
                     <p class="card-text">{{$article->description}}</p>
                     <a href="/" class="btn btn-primary">Back</a>
-                    @if($role == 'admin')
-                    <a href="/blog/{{$article->id}}/delete" class="btn btn-danger">Delete</a>
+                    @if($role == 'admin' || $role == 'member')
+                    <a href="/blog/{{$article->id}}/edit" class="btn btn-primary">Edit</a>
                     @endif
+
+                    <form action="{{ url("blog/{$article->id}/delete")}}" method="post">
+                    @csrf
+                    @method('delete')
+                        @if($role == 'admin')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        @endif
+                    </form>
                 </div>
             </div>
         </div>

@@ -14,31 +14,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/f', function () {
-//     return view('fullStory');
-// });
 Auth::routes();
 
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/fullStory/{id}', 'HomeController@fullStory')->name('fullStory');
-Route::get('/userMenu', 'HomeController@showUser')->name('showUser');
-
-//update profile
-Route::get('/profileMenu/{id}/edit', 'HomeController@profile');
-Route::post('/profileMenu/{id}/update', 'HomeController@updateProfile');
-
-//category
 Route::get('/categorize/{id}', 'HomeController@category');
 
-Route::get('/blog', 'HomeController@blogList')->name('blogList');
-Route::get('/createBlog', 'BlogController@create')->name('createBlog');
+Route::group(['prefix' => 'userMenu'], function(){
 
-//insert blog
-Route::post('/createBlog/store', 'BlogController@store')->name('createBlog');
+    Route::get('/', 'HomeController@showUser')->name('showUser');
+    Route::delete('{id}/delete', 'HomeController@deleteUser');
+});
 
-//delete user
-Route::get('/userMenu/{id}/delete', 'HomeController@deleteUser');
+Route::group(['prefix' => 'profileMenu'], function(){
 
-//delete blog
-Route::get('/blog/{id}/delete', 'BlogController@destroy');
+    Route::get('edit/{id}', 'HomeController@profile');
+    Route::put('update/{id}', 'HomeController@updateProfile');
+});
+
+Route::group(['prefix' => 'blog'], function(){
+    Route::get('/', 'HomeController@blogList')->name('blogList');
+    
+    Route::group(['prefix' => '{id}'], function(){
+        Route::delete('delete', 'BlogController@destroy');
+        Route::get('edit', 'BlogController@edit');
+        Route::put('update', 'BlogController@update');
+    });
+});
+
+Route::group(['prefix' => 'createBlog'], function(){
+    Route::get('/', 'BlogController@create')->name('createBlog');
+    Route::post('/store', 'BlogController@store')->name('createBlog');
+});
+
+
+
+
 
