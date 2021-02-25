@@ -211,11 +211,12 @@
                 <div class="title m-b-md">
                     Wonderful Journey
                     <h3>Blog of Indonesia Tourism</h3> 
+                    <a href="#cont" type="button" class="btn btn-light">See More</a>
                 </div>
             </div>
         </div>
 
-        <div class="container mt-5">
+        <div class="container mt-5" id="cont">
             <div class="row row-cols-3">
                 @foreach($article as $art)
                 <div class="col">
