@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Full Story</title>
+    <link rel="icon" type="image/png" href="/assets/ballon.png">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
