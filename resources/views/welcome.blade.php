@@ -132,6 +132,10 @@
             a{
                 text-decoration: none;
             }
+            .img-thumbnail{
+                height: 70%;
+                width: 90%;
+            }
         </style>
     </head>
     <body>
@@ -220,6 +224,7 @@
             <div class="row row-cols-3">
                 @foreach($article as $art)
                 <div class="col">
+                    <img src="/assets/{{$art->image}}" class="img-thumbnail">
                     <p>
                         <p class="tittle">
                             <a href="/fullStory/{{$art->id}}"><h2>{{$art->tittle}}</h2></a>
