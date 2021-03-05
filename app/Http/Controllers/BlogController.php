@@ -17,7 +17,14 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $article = Article::all(); 
+        $auth = Auth::check();
+        $role = 'guest';
+
+       if($auth){
+            $role = Auth::user()->role;
+        }
+        return view('blog.index',compact('role','article'));
     }
 
     /**
@@ -35,7 +42,7 @@ class BlogController extends Controller
             $role = Auth::user()->role;
         }
         
-        return view('createBlog',compact('role','category'));
+        return view('blog.create',compact('role','category'))->with('success', 'Article was Successfully Created!');
     }
 
     /**
@@ -63,7 +70,7 @@ class BlogController extends Controller
         $article = Article::create($request->all());
         
         
-        return redirect('/');
+        return redirect('/blog')->with('success', 'Article was Successfully Created!');
     }
 
     /**
@@ -97,7 +104,7 @@ class BlogController extends Controller
             $role = Auth::user()->role;
         }
         
-        return view('editBlog',compact('role','category','article'));
+        return view('blog.edit',compact('role','category','article'))->with('success', 'Article was Successfully Deleted!');
     }
 
     /**
@@ -132,7 +139,7 @@ class BlogController extends Controller
             $role = Auth::user()->role;
         }
 
-        return view('editBlog',compact('user','role','category','article'))->with('success',  'Successfully  update  a  student');;
+        return view('blog.edit',compact('user','role','category','article'));
     }
 
     /**
@@ -149,6 +156,6 @@ class BlogController extends Controller
         if($article != null){
             $article->delete();
         }
-        return redirect('/');
+        return redirect('/blog')->with('success', 'Article was Successfully Deleted!');
     }
 }

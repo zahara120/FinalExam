@@ -26,58 +26,6 @@ class HomeController extends Controller
         return view ('welcome', compact('role','article', 'category','user'));
     }
 
-    public function showUser(){
-        $user = User::where('role', '=' , 'member')->get(); 
-
-        $auth = Auth::check();
-        $role = 'guest';
- 
-       if($auth){
-            $role = Auth::user()->role;
-        }
-        return view('userMenu', compact('user','role'));
-    }
-
-    public function deleteUser($id){
-        $user = User::find($id); 
-        $user->delete();
-        return redirect('/');
-    }
-
-    public function profile($id){
-        $user = User::find($id); 
-        // dd($id);
-        $auth = Auth::check();
-        $role = 'guest';
- 
-       if($auth){
-            $role = Auth::user()->role;
-        }
-        return view('profileMenu', compact('user','role'));
-    }
-
-    public function updateProfile(Request $request ,$id){
-        // dd($request);
-        $article = Article::all();
-        $category = Category::all();
-        $user = User::all();
-
-        $user = User::find($id);
-        $user->name  =  $request->name;
-        $user->email  =  $request->email;
-        $user->phone  =  $request->phone;
-        $user->save();
-
-        $auth = Auth::check();
-        $role = 'guest';
- 
-       if($auth){
-            $role = Auth::user()->role;
-        }
-
-        return view('welcome',compact('user','role','category','article'));
-    }
-
     public function category($id){
         $category = Category::all();
         $article = Article::all();
@@ -104,16 +52,5 @@ class HomeController extends Controller
             $role = Auth::user()->role;
         }
         return view('fullStory',compact('role','article','category'));
-    }
-
-    public function blogList(){
-        $article = Article::all(); 
-        $auth = Auth::check();
-        $role = 'guest';
-
-       if($auth){
-            $role = Auth::user()->role;
-        }
-        return view('blog',compact('role','article'));
     }
 }
